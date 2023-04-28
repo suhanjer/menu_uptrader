@@ -1,0 +1,50 @@
+{% extends 'menu/layout.html' %}
+
+{% block body %}
+    <h1><a href="{% url 'index' %}">Меню:</a></h1>
+    <ul>
+        {% for item in menus %}
+            {% if item %}
+                <li>
+                    <a href="{% url 'menu0' item.code %}" {% if item.code == code %} style="font-weight:bolder; color:red;" {% endif %}>{{ item.name }}</a>                    
+                    <ul>
+                        {% for i in menus1 %}
+                            {% if i.previous.code == item.code %}
+                                <li>
+                                    <a href="{% url 'menu1' item.code i.code %}" {% if i.code == code %} style="font-weight:bolder; color:red;" {% endif %}>{{ i.name }}</a>
+                                </li>
+                                <ul>
+                                    {% for j in menus2 %}
+                                        {% if j.previous.code == i.code %}
+                                            <li>
+                                                <a href="{% url 'menu2' item.code i.code j.code %}" {% if j.code == code %} style="font-weight:bolder; color:red;" {% endif %}>{{ j.name }}</a>
+                                            </li>
+                                            <ul>
+                                                {% for k in menus3 %}
+                                                    {% if k.previous.code == j.code %}
+                                                        <li>
+                                                            <a href="{% url 'menu3' item.code i.code j.code k.code %}" {% if k.code == code %} style="font-weight:bolder; color:red;" {% endif %}>{{ k.name }}</a>
+                                                        </li>
+                                                        <ul>
+                                                            {% for l in menus4 %}
+                                                                {% if l.previous.code == k.code %}
+                                                                    <li>
+                                                                        <a href="{% url 'menu4' item.code i.code j.code k.code l.code %}" {% if l.code == code %} style="font-weight:bolder; color:red;" {% endif %}>{{ l.name }}</a>
+                                                                    </li>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>                    
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
