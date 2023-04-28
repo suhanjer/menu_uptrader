@@ -56,10 +56,15 @@ def menu3(request, menu1, menu2, menu3, menu4):
     })
 
 def menu4(request, menu1, menu2, menu3, menu4, menu5):
+    print('started')
     selected1 = Menu0.objects.get(code=menu1)
     selected2 = Menu1.objects.get(code=menu2)
     selected3 = Menu2.objects.get(code=menu3)
     selected4 = Menu3.objects.get(code=menu4)
+    print(selected1.level1.all())
+    print(selected2.level2.all())
+    print(selected3.level3.all())
+    print(selected4.level4.all())
     return render(request, "menu/index.html", {
         'menus': Menu0.objects.all(),
         'menus1': selected1.level1.all(),
